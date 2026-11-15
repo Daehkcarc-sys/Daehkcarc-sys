@@ -14,5 +14,8 @@
     "line": "AI/ML and security research. PhD and research internship applications.",
     "label_after": "Graduated · {date}",
     "heading_after": "The work goes on"
+  },
+  "ornament": {
+    "accent_day": "10-29"
   }
 }
