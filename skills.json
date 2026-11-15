@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Security",
+    "items": ["LLM agent security", "Prompt injection", "TLS · post-quantum", "Fraud detection"]
+  },
+  {
+    "title": "AI / ML",
+    "items": ["LangChain agents", "scikit-learn", "XGBoost", "OpenCV · MediaPipe"]
+  },
+  {
+    "title": "Tools",
+    "items": ["Python · FastAPI", "TypeScript · React", "Docker · Kubernetes", "Jenkins CI/CD"]
+  }
+]
