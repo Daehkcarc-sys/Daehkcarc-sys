@@ -1,0 +1,40 @@
+name: Daily rebuild
+
+# Regenerates the SVGs once a day: countdown numeral (banner and counter), project stars and
+# languages, and the 30-day activity strip. Uses only the built-in GITHUB_TOKEN.
+
+on:
+  schedule:
+    - cron: "10 23 * * *" # 00:10 in Tunis (UTC+1), just after the date changes
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the regenerated files; nothing else is granted
+
+concurrency:
+  group: daily-rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Rebuild SVGs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/build_all.py --fetch
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets data projects.json
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "Daily rebuild"
+            git push
+          fi

@@ -4,7 +4,11 @@
     "title": "SENTINEL Agent Defense",
     "description": "Runtime defense against prompt injection and data exfiltration for tool-using LLM agents.",
     "note": "Team entry · SENTINEL challenge, IndabaX Tunisia 2026 · built on the organizers' starter kit",
-    "tags": ["LLM Security", "Prompt Injection", "Python"],
+    "tags": [
+      "LLM Security",
+      "Prompt Injection",
+      "Python"
+    ],
     "language": "Python",
     "stars": 0
   },
@@ -13,7 +17,12 @@
     "title": "Agentic AI Fog",
     "description": "Trust-aware multi-agent fog layer for an agricultural digital twin: rules first, then a cache, then an LLM.",
     "note": "Internship project · published with my supervisor's permission",
-    "tags": ["Multi-Agent", "LangChain", "Edge / Fog", "Python"],
+    "tags": [
+      "Multi-Agent",
+      "LangChain",
+      "Edge / Fog",
+      "Python"
+    ],
     "language": "Python",
     "stars": 0
   },
@@ -22,7 +31,12 @@
     "title": "Quantum Shield",
     "description": "TLS and post-quantum readiness of 1,069 domains behind 718 Android apps. Custom TLS scanner with a hybrid-PQC probe, weak-configuration checks mapped to CVEs, clustering and Random Forest analysis of scan results.",
     "note": "Team project · ENSI PCD · my role: team lead (data collection, most of the backend, the TLS tester)",
-    "tags": ["TLS", "Post-Quantum", "FastAPI", "scikit-learn"],
+    "tags": [
+      "TLS",
+      "Post-Quantum",
+      "FastAPI",
+      "scikit-learn"
+    ],
     "language": "TypeScript",
     "stars": 0
   },
@@ -31,7 +45,12 @@
     "title": "Smart Checkout Optimizer",
     "description": "Hackathon prototype: an XGBoost fraud-risk model and a 3-D Secure friction simulator, with a React checkout demo.",
     "note": "",
-    "tags": ["Fraud ML", "XGBoost", "FastAPI", "React"],
+    "tags": [
+      "Fraud ML",
+      "XGBoost",
+      "FastAPI",
+      "React"
+    ],
     "language": "Python",
     "language_pin": true,
     "stars": 0
