@@ -55,6 +55,53 @@ def tpath(text, face, size, x, y, fill, anchor="start", tracking=0.0, extra=""):
     return f'<path d="{d}" fill="{fill}" {extra}/>'
 
 
+def _body_metrics():
+    return json.loads((ROOT / "scripts" / "body_metrics.json").read_text(encoding="utf-8"))
+
+
+def body_width(text, size, italic=False):
+    """Approximate width of live body text (Georgia metrics; other serifs in the stack are narrower or close)."""
+    m = _body_metrics()["italic" if italic else "regular"]
+    return sum(m.get(ch, 0.6) for ch in text) * size
+
+
+def wrap(text, size, max_width, italic=False, safety=1.05):
+    """Greedy word wrap for live body text, with a margin for font differences between systems."""
+    lines, cur = [], ""
+    for word in text.split():
+        trial = f"{cur} {word}".strip()
+        if cur and body_width(trial, size, italic) * safety > max_width:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = trial
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def body_text(lines, x, y, size, fill, line_height=None, italic=False, opacity=1.0):
+    """Live <text> lines in the safe serif stack. Returns (svg, y after the last line)."""
+    lh = line_height or size * 1.42
+    style = ' font-style="italic"' if italic else ""
+    out = "".join(
+        f'<text x="{x}" y="{y + i * lh:.1f}" font-family="{BODY_FONT}" font-size="{size}"{style} fill="{fill}" opacity="{opacity}">{esc(line)}</text>'
+        for i, line in enumerate(lines))
+    return out, y + len(lines) * lh
+
+
+def panel(width, height):
+    """Shared card ground: ink with a faint warm lift, paper grain, hairline border."""
+    return (
+        f'<rect width="{width}" height="{height}" fill="url(#lift)"/>'
+        f'<rect width="{width}" height="{height}" filter="url(#grain)" opacity=".16"/>',
+        f'<rect x=".75" y=".75" width="{width - 1.5}" height="{height - 1.5}" rx="13.5" fill="none" stroke="{CREAM}" stroke-opacity=".16" stroke-width="1.5"/>',
+    )
+
+
+PANEL_DEFS = f'<radialGradient id="lift" cx=".3" cy=".2" r="1"><stop offset="0" stop-color="#1c1317"/><stop offset="1" stop-color="{INK}"/></radialGradient>'
+
+
 def grain(r=0.93, g=0.89, b=0.82):
     """Paper grain: fine noise turned into speckles of one colour. Use on a full-size rect at low opacity."""
     return (

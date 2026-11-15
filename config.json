@@ -8,6 +8,11 @@
   },
   "countdown": {
     "date": "2027-06-30",
-    "utc_offset_hours": 1
+    "utc_offset_hours": 1,
+    "label": "Days to graduation · {date}",
+    "heading": "Building this year",
+    "line": "AI/ML and security research. PhD and research internship applications.",
+    "label_after": "Graduated · {date}",
+    "heading_after": "The work goes on"
   }
 }
